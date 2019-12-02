@@ -1,19 +1,20 @@
-const {app, BrowserWindow} = require('electron')    
-var Excel = require('exceljs');
+const {app, BrowserWindow} = require('electron') 
 
 function createWindow () {   
     win = new BrowserWindow({width: 800, height: 600}) 
-    win.loadURL('http://localhost:3000/')   
+    win.loadURL('http://localhost:3000/')
+    openTracer()   
 }      
+
+function openTracer() {
+    var child = require('child_process').execFile;
+    var executablePath = "C:\\Users\\mikee\\Desktop\\Projects\\pinpoint-v0.1\\app.publish\\WpfApp1.exe";
+    child(executablePath,{windowsHide: true});
+}
+
 app.on('ready', createWindow)
 
-var workbook = new Excel.Workbook();
-workbook.xlsx.readFile("C:/Users/mikee/Desktop/TestBook.xlsx").then(function(){
-    var worksheet = workbook.getWorksheet("Sheet1");
-    worksheet.eachRow(function(row, rowNumber) {
-        console.log('Row ' + rowNumber + ' = ' + JSON.stringify(row.values));
-    });
-});
+
 
 
 

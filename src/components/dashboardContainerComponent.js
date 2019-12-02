@@ -17,39 +17,32 @@ function DashboardContainerComponent() {
     return(
         <Container maxWidth="xl">
             <Grid container spacing={3} className={classes.gridContainer}>
-                <Grid item xs={6} md={2}>
-                    <PitchInformationGridItemComponent>
+                <Grid container item md={6} spacing={3}>
+                    <Grid item xs={6} md={3}>
+                        <PitchInformationGridItemComponent>
 
-                    </PitchInformationGridItemComponent>
-                </Grid>
-                <Grid item xs={6} md={2}>
-                    <PitchCountGridItemComponent>
+                        </PitchInformationGridItemComponent>
+                    </Grid>
+                    <Grid item xs={6} md={3}>
+                        <PitchCountGridItemComponent>
 
-                    </PitchCountGridItemComponent>
-                </Grid>
-                <Grid item md={8}>
+                        </PitchCountGridItemComponent>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                        <PitchSpeedGridItemComponent>
 
-                </Grid>
-                <Grid item xs={6} md={4}>
-                    <PitchSpeedGridItemComponent>
+                        </PitchSpeedGridItemComponent>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                        <PitchSpinGridItemComponent>
 
-                    </PitchSpeedGridItemComponent>
-                </Grid>
-                <Grid md={8}>
-
-                </Grid>
-                <Grid item xs={6} md={4}>
-                    <PitchSpinGridItemComponent>
-
-                    </PitchSpinGridItemComponent>
-                </Grid>
-                <Grid md={8}>
-
-                </Grid>
-                <Grid item xs={6} md={4}>
-                    <PitchMovementGridItemComponent>
-                        
-                    </PitchMovementGridItemComponent>
+                        </PitchSpinGridItemComponent>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                        <PitchMovementGridItemComponent>
+                            
+                        </PitchMovementGridItemComponent>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>
