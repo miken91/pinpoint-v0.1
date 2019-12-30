@@ -6,10 +6,12 @@ import PitchSpinGridItemComponent from './dashboardItems/pitchSpinGridItemCompon
 import PitchMovementGridItemComponent from './dashboardItems/pitchMovementGridItemCompoent';
 import PitchInformationGridItemComponent from './dashboardItems/pitchInformationGridItemComponent';
 import PitchCountGridItemComponent from './dashboardItems/pitchCountGridItemComponent';
+import GraphComponent from './dashboardItems/graphComponent';
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
         marginTop: '1em',
+        marginBottom: '1em'
     }
 }))
 function DashboardContainerComponent() {
@@ -18,12 +20,12 @@ function DashboardContainerComponent() {
         <Container maxWidth="xl">
             <Grid container spacing={3} className={classes.gridContainer}>
                 <Grid container item md={6} spacing={3}>
-                    <Grid item xs={6} md={3}>
+                    <Grid item xs={6} md={6}>
                         <PitchInformationGridItemComponent>
 
                         </PitchInformationGridItemComponent>
                     </Grid>
-                    <Grid item xs={6} md={3}>
+                    <Grid item xs={6} md={6}>
                         <PitchCountGridItemComponent>
 
                         </PitchCountGridItemComponent>
@@ -42,6 +44,13 @@ function DashboardContainerComponent() {
                         <PitchMovementGridItemComponent>
                             
                         </PitchMovementGridItemComponent>
+                    </Grid>
+                </Grid>
+                <Grid container item md={6} spacing={3}>
+                    <Grid item xs={6} md={6}>
+                        <GraphComponent>
+
+                        </GraphComponent>
                     </Grid>
                 </Grid>
             </Grid>
