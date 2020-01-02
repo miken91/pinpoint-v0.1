@@ -6,7 +6,7 @@ import PitchSpinGridItemComponent from './dashboardItems/pitchSpinGridItemCompon
 import PitchMovementGridItemComponent from './dashboardItems/pitchMovementGridItemCompoent';
 import PitchInformationGridItemComponent from './dashboardItems/pitchInformationGridItemComponent';
 import PitchCountGridItemComponent from './dashboardItems/pitchCountGridItemComponent';
-import GraphComponent from './dashboardItems/graphComponent';
+
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
@@ -17,42 +17,23 @@ const useStyles = makeStyles(theme => ({
 function DashboardContainerComponent() {
     const classes = useStyles();
     return(
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
             <Grid container spacing={3} className={classes.gridContainer}>
-                <Grid container item md={6} spacing={3}>
-                    <Grid item xs={6} md={6}>
-                        <PitchInformationGridItemComponent>
-
-                        </PitchInformationGridItemComponent>
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                        <PitchCountGridItemComponent>
-
-                        </PitchCountGridItemComponent>
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                        <PitchSpeedGridItemComponent>
-
-                        </PitchSpeedGridItemComponent>
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                        <PitchSpinGridItemComponent>
-
-                        </PitchSpinGridItemComponent>
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                        <PitchMovementGridItemComponent>
-                            
-                        </PitchMovementGridItemComponent>
-                    </Grid>
-                </Grid>
-                <Grid container item md={6} spacing={3}>
-                    <Grid item xs={6} md={6}>
-                        <GraphComponent>
-
-                        </GraphComponent>
-                    </Grid>
-                </Grid>
+               <Grid item md={6}>
+                   <PitchSpeedGridItemComponent></PitchSpeedGridItemComponent>
+               </Grid>
+               <Grid item md={6}>
+                   <PitchMovementGridItemComponent></PitchMovementGridItemComponent>
+               </Grid>
+               <Grid item md={3}>
+                   <PitchCountGridItemComponent></PitchCountGridItemComponent>
+               </Grid>
+               <Grid item md={3}>
+                   <PitchSpinGridItemComponent></PitchSpinGridItemComponent>
+               </Grid>
+               <Grid item md={6}>
+                   <PitchInformationGridItemComponent></PitchInformationGridItemComponent>
+               </Grid>
             </Grid>
         </Container>
     );

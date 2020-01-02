@@ -1,6 +1,7 @@
 import React from 'react';
 import { Paper, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
+import { Chart } from 'react-google-charts';
 
 const useStyles = makeStyles(theme => ({
 lastPitchSpeedTitle: {
@@ -9,12 +10,12 @@ lastPitchSpeedTitle: {
     textAlign: 'center'
 },
 lastPitchSpeed: {
-    fontSize: '2em',
+    fontSize: '3em',
     fontWeight: 'bold',
     textAlign: 'center'
 },
 lastPitchSpeedSubScriptItems: {
-    fontSize: '.75em',
+    fontSize: '1.25em',
     fontWeight: 'bold',
     textAlign: 'center',
 },
@@ -27,19 +28,38 @@ function PitchSpeedGridItemComponent() {
     return(
       <Paper className={classes.section}>
           <Grid container>
-              <Grid className={classes.lastPitchSpeedTitle} item xs={12}>
-                Pitch Velocity
+              <Grid item>
+                <Chart
+                    height="100%"
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                      ['x', 'Pitch Velocity'],
+                      [0, 0],
+                      [1, 10],
+                      [2, 23],
+                      [3, 17],
+                    ]}
+                    options={{
+                      title: 'Session Pitch Velocity',
+                      legend: 'none',
+                      hAxis: {
+                        title: 'Pitch Count',
+                      },
+                      vAxis: {
+                        title: 'Velocity',
+                      },
+                    }}/>
               </Grid>
-              <Grid className={classes.lastPitchSpeed} item xs={12}> 
+              <Grid item>
+                <h3>Latest Pitch</h3>
                 <p>90 mph</p>
+                <h6>AVG</h6>
+                <p>85 mph</p>
+                <h6>MAX</h6>
+                <p>95 mph</p>
               </Grid>
-              <Grid className={classes.lastPitchSpeedSubScriptItems} item xs={12} sm={6}>
-                <p>Avg Pitch Speed: 90</p> 
-              </Grid>
-              <Grid className={classes.lastPitchSpeedSubScriptItems} item xs={12} sm={6}>
-                <p>Max Pitch Speed: 90</p>
-              </Grid>
-          </Grid>
+            </Grid>
       </Paper>  
     )
 }
