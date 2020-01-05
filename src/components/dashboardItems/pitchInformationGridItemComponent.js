@@ -22,9 +22,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function PitchInformationGridItemComponent() {
+function PitchInformationGridItemComponent(props) {
     const classes = useStyles();
-
       return (
         <Paper className={classes.section}>
           <Grid container>
@@ -37,13 +36,13 @@ function PitchInformationGridItemComponent() {
                            Pitch Type
                        </h3>
                        <p>
-                           Fastball
+                           {props.pitchData[2]}
                        </p>
                        <h3>
                            Pitch Result
                        </h3>
                        <p>
-                           Strike
+                           {props.pitchData[3]}
                        </p>
                    </Grid>
                    <Grid item>

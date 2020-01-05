@@ -23,7 +23,7 @@ section: {
   height: '100%'
 }
 }))
-function PitchSpeedGridItemComponent() {
+function PitchSpeedGridItemComponent(props) {
     const classes = useStyles();
     return(
       <Paper className={classes.section}>
@@ -53,7 +53,7 @@ function PitchSpeedGridItemComponent() {
               </Grid>
               <Grid item>
                 <h3>Latest Pitch</h3>
-                <p>90 mph</p>
+                <p>{props.pitchData[5]} mph</p>
                 <h6>AVG</h6>
                 <p>85 mph</p>
                 <h6>MAX</h6>

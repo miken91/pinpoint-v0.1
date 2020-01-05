@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import PitchSpeedGridItemComponent from './dashboardItems/pitchSpeedGridItemComponent';
@@ -17,16 +17,21 @@ const useStyles = makeStyles(theme => ({
 }))
 function DashboardContainerComponent() {
     const { remote, ipcRenderer } = window.require('electron');
-    ipcRenderer.send('asynchronous-message', 'ping')
-    ipcRenderer.on('asynchronous-reply', (event, arg) => {
-        console.log(arg) // prints "pong"
-      })
+    const [pitchData, setPitchData] = useState([]);
+    
+    useEffect(()=> {
+        ipcRenderer.send('asynchronous-message', 'ping')
+        ipcRenderer.on('asynchronous-reply', (event, arg) => {
+            setPitchData(arg);
+        })
+    },[]   
+    );
     const classes = useStyles();
     return(
         <Container maxWidth="lg">
             <Grid container spacing={3} className={classes.gridContainer}>
                <Grid item sm={12} md={6}>
-                   <PitchSpeedGridItemComponent></PitchSpeedGridItemComponent>
+                   <PitchSpeedGridItemComponent pitchData={pitchData}></PitchSpeedGridItemComponent>
                </Grid>
                <Grid item sm={12} md={6}>
                    <PitchMovementGridItemComponent></PitchMovementGridItemComponent>
@@ -38,7 +43,7 @@ function DashboardContainerComponent() {
                    <PitchSpinGridItemComponent></PitchSpinGridItemComponent>
                </Grid>
                <Grid item sm={12} md={6}>
-                   <PitchInformationGridItemComponent></PitchInformationGridItemComponent>
+                   <PitchInformationGridItemComponent pitchData={pitchData}></PitchInformationGridItemComponent>
                </Grid>
                <Grid item sm={12} md={6}>
                    <PitchTrajectorySideViewGridItemComponent></PitchTrajectorySideViewGridItemComponent>
