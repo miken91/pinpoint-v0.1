@@ -23,7 +23,6 @@ function PitchMovementGridItemComponent() {
                             ['Break', 'Movement'], 
                             [3,-1]
                         ]}
-                        width="80%"
                         height="250px"
                         options={{
                             title: "Pitch break and movement",

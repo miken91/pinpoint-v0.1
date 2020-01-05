@@ -29,7 +29,7 @@ function PitchSpinGridItemComponent() {
                     Spin Rate
                 </Grid>
                 <Grid container direction='row' justify='space-around'>
-                    <Grid item alignItems='flex-start'>
+                    <Grid item>
                         <Grid  item>
                             <p className={classes.spinRatePathTitle}>Release</p> 
                         </Grid>

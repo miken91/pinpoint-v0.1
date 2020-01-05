@@ -6,6 +6,7 @@ import PitchSpinGridItemComponent from './dashboardItems/pitchSpinGridItemCompon
 import PitchMovementGridItemComponent from './dashboardItems/pitchMovementGridItemCompoent';
 import PitchInformationGridItemComponent from './dashboardItems/pitchInformationGridItemComponent';
 import PitchCountGridItemComponent from './dashboardItems/pitchCountGridItemComponent';
+import PitchTrajectorySideViewGridItemComponent from './dashboardItems/pitchTrajectorySideViewGridItemComponent';
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,24 +16,32 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 function DashboardContainerComponent() {
+    const { remote, ipcRenderer } = window.require('electron');
+    ipcRenderer.send('asynchronous-message', 'ping')
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+        console.log(arg) // prints "pong"
+      })
     const classes = useStyles();
     return(
         <Container maxWidth="lg">
             <Grid container spacing={3} className={classes.gridContainer}>
-               <Grid item md={6}>
+               <Grid item sm={12} md={6}>
                    <PitchSpeedGridItemComponent></PitchSpeedGridItemComponent>
                </Grid>
-               <Grid item md={6}>
+               <Grid item sm={12} md={6}>
                    <PitchMovementGridItemComponent></PitchMovementGridItemComponent>
                </Grid>
-               <Grid item md={3}>
+               <Grid item sm={6} md={3}>
                    <PitchCountGridItemComponent></PitchCountGridItemComponent>
                </Grid>
-               <Grid item md={3}>
+               <Grid item sm={6} md={3}>
                    <PitchSpinGridItemComponent></PitchSpinGridItemComponent>
                </Grid>
-               <Grid item md={6}>
+               <Grid item sm={12} md={6}>
                    <PitchInformationGridItemComponent></PitchInformationGridItemComponent>
+               </Grid>
+               <Grid item sm={12} md={6}>
+                   <PitchTrajectorySideViewGridItemComponent></PitchTrajectorySideViewGridItemComponent>
                </Grid>
             </Grid>
         </Container>
