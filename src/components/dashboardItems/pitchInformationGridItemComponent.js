@@ -24,6 +24,12 @@ const useStyles = makeStyles(theme => ({
 
 function PitchInformationGridItemComponent(props) {
     const classes = useStyles();
+    var lastPitchType = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][2] : 0;
+    var lastPitchResult = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][3] : 0;
+    var fastballCount = 0;
+    props.pitchData.map((pitchData, i)=> {
+      fastballCount = pitchData[2].includes('Fast') ? fastballCount + 1 : fastballCount;
+    })
       return (
         <Paper className={classes.section}>
           <Grid container>
@@ -36,13 +42,13 @@ function PitchInformationGridItemComponent(props) {
                            Pitch Type
                        </h3>
                        <p>
-                           {props.pitchData[2]}
+                           {lastPitchType}
                        </p>
                        <h3>
                            Pitch Result
                        </h3>
                        <p>
-                           {props.pitchData[3]}
+                           {lastPitchResult}
                        </p>
                    </Grid>
                    <Grid item>
@@ -51,10 +57,10 @@ function PitchInformationGridItemComponent(props) {
                         loader={<div>Loading Chart</div>}
                         data={[
                           ['Pitch Type', 'Amount per type'],
-                          ['Fastball', 5],
-                          ['Curveball', 4],
-                          ['Slider', 3],
-                          ['Changeup', 2],
+                          ['Fastball', fastballCount],
+                          ['Curveball', 0],
+                          ['Slider', 0],
+                          ['Changeup', 0],
                         ]}
                         options={{
                           legend: 'none',

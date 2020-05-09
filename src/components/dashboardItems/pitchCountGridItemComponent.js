@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import PitchMovementGridItemComponent from './pitchMovementGridItemCompoent';
+import PitchMovementGridItemComponent from './pitchMovementGridItemComponent';
 
 const useStyles = makeStyles(theme => ({
     countTitle: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function PitchCountGridItemComponent() {
+function PitchCountGridItemComponent(props) {
     const classes = useStyles();
     return (
         <Paper className={classes.section}>
@@ -29,7 +29,7 @@ function PitchCountGridItemComponent() {
                 Pitch Count
             </Grid>
             <Grid item xs={12} className={classes.count}>
-                <p>25</p>
+                <p>{props.pitchData.length}</p>
             </Grid>
           </Grid>
         </Paper>

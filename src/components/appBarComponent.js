@@ -1,7 +1,6 @@
-import React from 'react';
-import { AppBar, Toolbar, IconButton, Menu, MenuItem} from '@material-ui/core';
+import React, { useState,useEffect } from 'react';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Tabs, Tab} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -11,17 +10,34 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function AppBarComponent() {
+function AppBarComponent(props) {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const [anchorEl, setAnchorEl] = useState(null);
+    const {
+        page: [page, setPage]
+    } = {
+        page: useState(''),
+        ...props.state
+    }
+    const {
+        tab: [tab, setTab]
+    } = {
+        tab: useState(0),
+        ...props.state
+    }
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = event => {
+        setPage(event.currentTarget.id)
         setAnchorEl(null);
     };
+    
+    const handleChange = (event, newTab) => {
+        setTab(newTab);
+    }
+
     return (
         <AppBar position="sticky">
             <Toolbar>
@@ -35,26 +51,17 @@ function AppBarComponent() {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Dashboard</MenuItem>
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    {/* <MenuItem id='Home' onClick={handleClose}>Home</MenuItem> */}
+                    <MenuItem id='Dashboard' onClick={handleClose}>Dashboard</MenuItem>
+                    <MenuItem id='Profile' onClick={handleClose}>Profile</MenuItem>
                 </Menu>
                 <h2 className={classes.menuTitle}>Pinpoint</h2>
-                <h4>Session Controls</h4>
-                <IconButton>
-                    <ExpandMore />
-                </IconButton>
-                {/* <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                >
-                    <MenuItem onClick={handleClose}>Start Session</MenuItem>
-                    <MenuItem onClick={handleClose}>End Session</MenuItem>
-                </Menu> */}
+                <Tabs 
+                    value={tab}
+                    onChange={handleChange}>
+                        <Tab label="View Previous Session"></Tab>
+                        <Tab label="Start New Session"></Tab>
+                </Tabs>
             </Toolbar>
         </AppBar>
     );

@@ -25,6 +25,18 @@ section: {
 }))
 function PitchSpeedGridItemComponent(props) {
     const classes = useStyles();
+    var data = [['x', 'Pitch Velocity']];
+    var total = 0;
+    var avg = 0;
+    var highest = 0;
+    var lastPitch = 0;
+    props.pitchData.map((pitchData, i)=>{
+      data.push([i + 1, pitchData[5]])
+      total = total + pitchData[5]
+      avg = total/(i+1);
+      highest = pitchData[5]>highest ? pitchData[5] : highest;
+      lastPitch = pitchData[5];
+    })
     return(
       <Paper className={classes.section}>
           <Grid container>
@@ -33,13 +45,7 @@ function PitchSpeedGridItemComponent(props) {
                     height="100%"
                     chartType="LineChart"
                     loader={<div>Loading Chart</div>}
-                    data={[
-                      ['x', 'Pitch Velocity'],
-                      [0, 0],
-                      [1, 10],
-                      [2, 23],
-                      [3, 17],
-                    ]}
+                    data={data}
                     options={{
                       title: 'Session Pitch Velocity',
                       legend: 'none',
@@ -53,11 +59,11 @@ function PitchSpeedGridItemComponent(props) {
               </Grid>
               <Grid item>
                 <h3>Latest Pitch</h3>
-                <p>{props.pitchData[5]} mph</p>
+                <p>{lastPitch} mph</p>
                 <h6>AVG</h6>
-                <p>85 mph</p>
-                <h6>MAX</h6>
-                <p>95 mph</p>
+                <p>{avg} mph</p>
+                <h6>FASTEST</h6>
+                <p>{highest} mph</p>
               </Grid>
             </Grid>
       </Paper>  

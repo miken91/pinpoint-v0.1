@@ -20,8 +20,12 @@ const useStyles = makeStyles(theme => ({
         height: '100%'
     }
 }))
-function PitchSpinGridItemComponent() {
+function PitchSpinGridItemComponent(props) {
     const classes = useStyles()
+    var releaseSpinPerMin = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][27] : 0;
+    var breakSpinPerMin = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][42] : 0;
+    var plateSpinPerMin = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][58] : 0;
+
     return(
         <Paper className={classes.section}>
             <Grid container>
@@ -42,24 +46,24 @@ function PitchSpinGridItemComponent() {
                     </Grid>
                     <Grid item>
                         <Grid  item>
-                            <p className={classes.spinRate}>1500<sub>rpm</sub></p> 
+                            <p className={classes.spinRate}>{releaseSpinPerMin}<sub>rpm</sub></p> 
                         </Grid>
                         <Grid item>
-                            <p className={classes.spinRate}>1500<sub>rpm</sub></p>
+                            <p className={classes.spinRate}>{breakSpinPerMin}<sub>rpm</sub></p>
                         </Grid>
                         <Grid item>
-                            <p className={classes.spinRate}>1500<sub>rpm</sub></p>
+                            <p className={classes.spinRate}>{plateSpinPerMin}<sub>rpm</sub></p>
                         </Grid>
                     </Grid>
                     <Grid item>
                         <Grid  item>
-                            <p className={classes.spinRate}>30<sub>rps</sub></p> 
+                            <p className={classes.spinRate}>{(releaseSpinPerMin/60).toFixed(0)}<sub>rps</sub></p> 
                         </Grid>
                         <Grid item>
-                            <p className={classes.spinRate}>30<sub>rps</sub></p>
+                            <p className={classes.spinRate}>{(breakSpinPerMin/60).toFixed(0)}<sub>rps</sub></p>
                         </Grid>
                         <Grid item>
-                            <p className={classes.spinRate}>30<sub>rps</sub></p>
+                            <p className={classes.spinRate}>{(plateSpinPerMin/60).toFixed(0)}<sub>rps</sub></p>
                         </Grid>
                     </Grid>
                 </Grid>

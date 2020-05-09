@@ -9,8 +9,11 @@ const useStyles = makeStyles(theme =>({
     }
 }));
 
-function PitchTrajectorySideViewGridItemComponent(){
+function PitchTrajectorySideViewGridItemComponent(props){
     const classes = useStyles();
+    var pitchHeightAtRelease = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][24] : 0;
+    var pitchHeightAtBreak = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][39] : 0;
+    var pitchHeightAtPlate = props.pitchData.length>0 ? props.pitchData[props.pitchData.length - 1][55] : 0;
     return(
         <Paper className={classes.section}>
             <Grid>
@@ -20,9 +23,9 @@ function PitchTrajectorySideViewGridItemComponent(){
                     loader={<div>Loading Chart</div>}
                     data={[
                       ['Pitch Location', 'Pitch Height'],
-                      ['Release',25],
-                      ['Break', 35],
-                      ['Plate', 10],
+                      ['Release',pitchHeightAtRelease],
+                      ['Break', pitchHeightAtBreak],
+                      ['Plate', pitchHeightAtPlate],
                     ]}
                     options={{
                       title: 'Pitch Trajectory',

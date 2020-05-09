@@ -1,11 +1,9 @@
-import React from 'react';
-import AppTemplate from './templates/appTemplate'
+import React, { useState, useEffect }  from 'react';
+import AppTemplate from './templates/AppTemplate'
 
 function App() {
   return (
-    <AppTemplate>
-
-    </AppTemplate>
+    <AppTemplate></AppTemplate>
   );
 }
 
