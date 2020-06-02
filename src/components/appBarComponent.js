@@ -12,28 +12,13 @@ const useStyles = makeStyles(theme => ({
 
 function AppBarComponent(props) {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = useState(null);
-    const {
-        page: [page, setPage]
-    } = {
-        page: useState(''),
-        ...props.state
-    }
     const {
         tab: [tab, setTab]
     } = {
         tab: useState(0),
         ...props.state
     }
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget);
-    };
 
-    const handleClose = event => {
-        setPage(event.currentTarget.id)
-        setAnchorEl(null);
-    };
-    
     const handleChange = (event, newTab) => {
         setTab(newTab);
     }
@@ -41,21 +26,7 @@ function AppBarComponent(props) {
     return (
         <AppBar position="sticky">
             <Toolbar>
-                <IconButton onClick={handleClick}>
-                    <MenuIcon />
-                </IconButton>
-                <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                >
-                    {/* <MenuItem id='Home' onClick={handleClose}>Home</MenuItem> */}
-                    <MenuItem id='Dashboard' onClick={handleClose}>Dashboard</MenuItem>
-                    <MenuItem id='Profile' onClick={handleClose}>Profile</MenuItem>
-                </Menu>
-                <h2 className={classes.menuTitle}>Pinpoint</h2>
+                <h2 className={classes.menuTitle}>Pinpoint Pitch Tracking</h2>
                 <Tabs 
                     value={tab}
                     onChange={handleChange}>

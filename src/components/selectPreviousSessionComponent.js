@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme =>({
 }));
 function SelectPreviousSessionComponent(props) {
     const { remote, ipcRenderer } = window.require('electron');
-    const rows = [{pitcherName: "Mike", dateRecorded: "10-10-20"}]
+    const [pitchers, setPitchers] = useState([]);
     const {
         previousSession: [previousSession, setPreviousSession]
     } = {
@@ -23,6 +23,10 @@ function SelectPreviousSessionComponent(props) {
         ipcRenderer.on('returningSessionData', (event, arg) => {
             setPreviousSession(arg);
         })
+        ipcRenderer.on('returningSessions', function(event, arg){
+            setPitchers(arg)
+        })
+        ipcRenderer.send('getSessions')
     },[]   
     );
     const classes = useStyles();
@@ -32,17 +36,21 @@ function SelectPreviousSessionComponent(props) {
                 <Table className={classes.tableSize}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Pitcher Name</TableCell>
+                            <TableCell>First Name</TableCell>
+                            <TableCell>Last Name</TableCell>
+                            <TableCell>Teams</TableCell>
                             <TableCell>Date Recorded</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row=>(
+                        {pitchers.map(pitcher=>(
                         <TableRow
                         hover
-                        onClick={event => handleClick(event, row)}>
-                            <TableCell>{row.pitcherName}</TableCell>
-                            <TableCell>{row.dateRecorded}</TableCell>
+                        onClick={event => handleClick(event, pitcher)}>
+                            <TableCell>{pitcher.firstName}</TableCell>
+                            <TableCell>{pitcher.lastName}</TableCell>
+                            <TableCell>{pitcher.team}</TableCell>
+                            <TableCell>{pitcher.date}</TableCell>
                         </TableRow>
                         ))}
                     </TableBody>
