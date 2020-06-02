@@ -10,7 +10,7 @@ var rows = [];
 function createWindow() {
     var win = new BrowserWindow({ width: 800, height: 600, webPreferences: { nodeIntegration: true } })
     win.loadURL('http://localhost:3000/')
-    path = app.getAppPath();
+    path = app.getPath('userData');
     !fs.existsSync(path + '/data_input') && fs.mkdirSync(path + '/data_input');
     !fs.existsSync(path + '/saved_sessions') && fs.mkdirSync(path + '/saved_sessions');
     const watcher = chokidar.watch(path + "/data_input/data.csv", {
